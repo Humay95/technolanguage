@@ -12,7 +12,7 @@ namespace TexnoGallery.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class Questions
+    public partial class Question
     {
         public int Id { get; set; }
         public string Name { get; set; }

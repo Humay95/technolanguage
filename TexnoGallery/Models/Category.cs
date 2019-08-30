@@ -17,13 +17,13 @@ namespace TexnoGallery.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Category()
         {
-            this.SubCategory = new HashSet<SubCategory>();
+            this.SubCategories = new HashSet<SubCategory>();
         }
     
         public int Id { get; set; }
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<SubCategory> SubCategory { get; set; }
+        public virtual ICollection<SubCategory> SubCategories { get; set; }
     }
 }

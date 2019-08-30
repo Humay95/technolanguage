@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using TexnoGallery.Text
+<!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -42,9 +43,9 @@
                                     <img src="~/images/youtube16.png" alt="">
                                 </a>
                             </li>
-                            <li class="pr-0"><a href="#">En |</a></li>
-                            <li class="pr-0"><a href="#">Az |</a></li>
-                            <li><a href="#">Ru</a></li>
+                            <li><a href="@Url.Action( "Change","LanguageChange",new { Lang = "en" })">en</a> </li>
+                            <li><a href="@Url.Action( "Change","LanguageChange",new { Lang = "az" })">az</a> </li>
+                            <li><a href="@Url.Action( "Change","LanguageChange",new { Lang = "ru" })">ru</a> </li>
                         </ul>
                     </div>
                 </div>
@@ -79,7 +80,7 @@
                             <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
                                 <div class="navbar-nav  main-menu">
                                     <a class="nav-item nav-link text-white mr-4 menu-a" href="@Url.Action("Index","Home")">
-                                        Ana Səhifə  <div class="active"></div>
+                                        @Rho  <div class="active"></div>
                                         <span class="sr-only">(current)</span>
                                     </a>
                                     <a class="nav-item nav-link text-white mr-4 menu-a" href="@Url.Action("Product", "Product")">
@@ -203,6 +204,7 @@
     <script>
         AOS.init();
     </script>
+    
 </body>
 
 </html>

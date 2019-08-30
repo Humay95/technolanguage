@@ -17,9 +17,9 @@ namespace TexnoGallery.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Product()
         {
-            this.PcTopla = new HashSet<PcTopla>();
-            this.ProductImage = new HashSet<ProductImage>();
-            this.ProductOptions = new HashSet<ProductOptions>();
+            this.PcToplas = new HashSet<PcTopla>();
+            this.ProductImages = new HashSet<ProductImage>();
+            this.ProductOptions = new HashSet<ProductOption>();
         }
     
         public int Id { get; set; }
@@ -30,11 +30,11 @@ namespace TexnoGallery.Models
         public Nullable<int> Discount { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<PcTopla> PcTopla { get; set; }
+        public virtual ICollection<PcTopla> PcToplas { get; set; }
         public virtual SubCategory SubCategory { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductImage> ProductImage { get; set; }
+        public virtual ICollection<ProductImage> ProductImages { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<ProductOptions> ProductOptions { get; set; }
+        public virtual ICollection<ProductOption> ProductOptions { get; set; }
     }
 }

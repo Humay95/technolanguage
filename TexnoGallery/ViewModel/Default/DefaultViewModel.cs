@@ -11,7 +11,7 @@ namespace TexnoGallery.ViewModel.Default
     {
         public List<Slide> SlideImage;
         public List<ImageCategory> CategoryImage;
-        public AboutUs aboutTech;
+        public AboutU aboutTech;
         public Contact contactTech;
         public List<Brend> BrendPhoto;
         public List<Product> productList;

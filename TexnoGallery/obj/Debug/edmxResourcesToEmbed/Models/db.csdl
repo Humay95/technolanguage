@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Schema Namespace="TexnoGalleryModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
-  <EntityType Name="AboutUs">
+<Schema Namespace="texnoModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="AboutU">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -30,7 +30,7 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="70" FixedLength="false" Unicode="true" Nullable="false" />
-    <NavigationProperty Name="SubCategory" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
+    <NavigationProperty Name="SubCategories" Relationship="Self.FK_SubCategory_Category" FromRole="Category" ToRole="SubCategory" />
   </EntityType>
   <EntityType Name="Contact">
     <Key>
@@ -52,7 +52,7 @@
     <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="Image" Type="String" MaxLength="800" FixedLength="false" Unicode="true" Nullable="false" />
   </EntityType>
-  <EntityType Name="Options">
+  <EntityType Name="Option">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -79,9 +79,9 @@
     <Property Name="Count" Type="Int32" Nullable="false" />
     <Property Name="SubCategoryId" Type="Int32" Nullable="false" />
     <Property Name="Discount" Type="Int32" />
-    <NavigationProperty Name="PcTopla" Relationship="Self.FK_PcTopla_Product" FromRole="Product" ToRole="PcTopla" />
+    <NavigationProperty Name="PcToplas" Relationship="Self.FK_PcTopla_Product" FromRole="Product" ToRole="PcTopla" />
     <NavigationProperty Name="SubCategory" Relationship="Self.FK_Product_SubCategory" FromRole="Product" ToRole="SubCategory" />
-    <NavigationProperty Name="ProductImage" Relationship="Self.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
+    <NavigationProperty Name="ProductImages" Relationship="Self.FK_ProductImage_Product" FromRole="Product" ToRole="ProductImage" />
     <NavigationProperty Name="ProductOptions" Relationship="Self.FK_ProductOptions_Product" FromRole="Product" ToRole="ProductOptions" />
   </EntityType>
   <EntityType Name="ProductImage">
@@ -93,17 +93,17 @@
     <Property Name="ProductId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Product" Relationship="Self.FK_ProductImage_Product" FromRole="ProductImage" ToRole="Product" />
   </EntityType>
-  <EntityType Name="ProductOptions">
+  <EntityType Name="ProductOption">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="ProductId" Type="Int32" Nullable="false" />
     <Property Name="OptionsId" Type="Int32" Nullable="false" />
-    <NavigationProperty Name="Options" Relationship="Self.FK_ProductOptions_Options" FromRole="ProductOptions" ToRole="Options" />
+    <NavigationProperty Name="Option" Relationship="Self.FK_ProductOptions_Options" FromRole="ProductOptions" ToRole="Options" />
     <NavigationProperty Name="Product" Relationship="Self.FK_ProductOptions_Product" FromRole="ProductOptions" ToRole="Product" />
   </EntityType>
-  <EntityType Name="Questions">
+  <EntityType Name="Question">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -128,19 +128,9 @@
     <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
     <Property Name="CategoryId" Type="Int32" Nullable="false" />
     <NavigationProperty Name="Category" Relationship="Self.FK_SubCategory_Category" FromRole="SubCategory" ToRole="Category" />
-    <NavigationProperty Name="Product" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
+    <NavigationProperty Name="Products" Relationship="Self.FK_Product_SubCategory" FromRole="SubCategory" ToRole="Product" />
   </EntityType>
-  <EntityType Name="sysdiagrams">
-    <Key>
-      <PropertyRef Name="diagram_id" />
-    </Key>
-    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
-    <Property Name="principal_id" Type="Int32" Nullable="false" />
-    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="version" Type="Int32" />
-    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
-  </EntityType>
-  <EntityType Name="Users">
+  <EntityType Name="User">
     <Key>
       <PropertyRef Name="Id" />
     </Key>
@@ -174,8 +164,8 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_ProductOptions_Options">
-    <End Role="Options" Type="Self.Options" Multiplicity="1" />
-    <End Role="ProductOptions" Type="Self.ProductOptions" Multiplicity="*" />
+    <End Role="Options" Type="Self.Option" Multiplicity="1" />
+    <End Role="ProductOptions" Type="Self.ProductOption" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Options">
         <PropertyRef Name="Id" />
@@ -223,7 +213,7 @@
   </Association>
   <Association Name="FK_ProductOptions_Product">
     <End Role="Product" Type="Self.Product" Multiplicity="1" />
-    <End Role="ProductOptions" Type="Self.ProductOptions" Multiplicity="*" />
+    <End Role="ProductOptions" Type="Self.ProductOption" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="Product">
         <PropertyRef Name="Id" />
@@ -233,46 +223,45 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
-  <EntityContainer Name="TexnoGalleryEntities" annotation:LazyLoadingEnabled="true">
-    <EntitySet Name="AboutUs" EntityType="Self.AboutUs" />
-    <EntitySet Name="Admin" EntityType="Self.Admin" />
-    <EntitySet Name="Brend" EntityType="Self.Brend" />
-    <EntitySet Name="Category" EntityType="Self.Category" />
-    <EntitySet Name="Contact" EntityType="Self.Contact" />
-    <EntitySet Name="ImageCategory" EntityType="Self.ImageCategory" />
-    <EntitySet Name="Options" EntityType="Self.Options" />
-    <EntitySet Name="PcTopla" EntityType="Self.PcTopla" />
-    <EntitySet Name="Product" EntityType="Self.Product" />
-    <EntitySet Name="ProductImage" EntityType="Self.ProductImage" />
-    <EntitySet Name="ProductOptions" EntityType="Self.ProductOptions" />
-    <EntitySet Name="Questions" EntityType="Self.Questions" />
-    <EntitySet Name="Slide" EntityType="Self.Slide" />
-    <EntitySet Name="SubCategory" EntityType="Self.SubCategory" />
-    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
-    <EntitySet Name="Users" EntityType="Self.Users" />
-    <EntitySet Name="OptionProduct" EntityType="Self.OptionProduct" />
+  <EntityContainer Name="texnoEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="AboutUs" EntityType="Self.AboutU" />
+    <EntitySet Name="Admins" EntityType="Self.Admin" />
+    <EntitySet Name="Brends" EntityType="Self.Brend" />
+    <EntitySet Name="Categories" EntityType="Self.Category" />
+    <EntitySet Name="Contacts" EntityType="Self.Contact" />
+    <EntitySet Name="ImageCategories" EntityType="Self.ImageCategory" />
+    <EntitySet Name="Options" EntityType="Self.Option" />
+    <EntitySet Name="PcToplas" EntityType="Self.PcTopla" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProductImages" EntityType="Self.ProductImage" />
+    <EntitySet Name="ProductOptions" EntityType="Self.ProductOption" />
+    <EntitySet Name="Questions" EntityType="Self.Question" />
+    <EntitySet Name="Slides" EntityType="Self.Slide" />
+    <EntitySet Name="SubCategories" EntityType="Self.SubCategory" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <EntitySet Name="OptionProducts" EntityType="Self.OptionProduct" />
     <AssociationSet Name="FK_SubCategory_Category" Association="Self.FK_SubCategory_Category">
-      <End Role="Category" EntitySet="Category" />
-      <End Role="SubCategory" EntitySet="SubCategory" />
+      <End Role="Category" EntitySet="Categories" />
+      <End Role="SubCategory" EntitySet="SubCategories" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductOptions_Options" Association="Self.FK_ProductOptions_Options">
       <End Role="Options" EntitySet="Options" />
       <End Role="ProductOptions" EntitySet="ProductOptions" />
     </AssociationSet>
     <AssociationSet Name="FK_PcTopla_Product" Association="Self.FK_PcTopla_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="PcTopla" EntitySet="PcTopla" />
+      <End Role="Product" EntitySet="Products" />
+      <End Role="PcTopla" EntitySet="PcToplas" />
     </AssociationSet>
     <AssociationSet Name="FK_Product_SubCategory" Association="Self.FK_Product_SubCategory">
-      <End Role="SubCategory" EntitySet="SubCategory" />
-      <End Role="Product" EntitySet="Product" />
+      <End Role="SubCategory" EntitySet="SubCategories" />
+      <End Role="Product" EntitySet="Products" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductImage_Product" Association="Self.FK_ProductImage_Product">
-      <End Role="Product" EntitySet="Product" />
-      <End Role="ProductImage" EntitySet="ProductImage" />
+      <End Role="Product" EntitySet="Products" />
+      <End Role="ProductImage" EntitySet="ProductImages" />
     </AssociationSet>
     <AssociationSet Name="FK_ProductOptions_Product" Association="Self.FK_ProductOptions_Product">
-      <End Role="Product" EntitySet="Product" />
+      <End Role="Product" EntitySet="Products" />
       <End Role="ProductOptions" EntitySet="ProductOptions" />
     </AssociationSet>
   </EntityContainer>

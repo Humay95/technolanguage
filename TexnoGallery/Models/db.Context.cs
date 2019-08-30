@@ -13,10 +13,10 @@ namespace TexnoGallery.Models
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class TexnoGalleryEntities : DbContext
+    public partial class texnoEntities : DbContext
     {
-        public TexnoGalleryEntities()
-            : base("name=TexnoGalleryEntities")
+        public texnoEntities()
+            : base("name=texnoEntities")
         {
         }
     
@@ -25,22 +25,21 @@ namespace TexnoGallery.Models
             throw new UnintentionalCodeFirstException();
         }
     
-        public virtual DbSet<AboutUs> AboutUs { get; set; }
-        public virtual DbSet<Admin> Admin { get; set; }
-        public virtual DbSet<Brend> Brend { get; set; }
-        public virtual DbSet<Category> Category { get; set; }
-        public virtual DbSet<Contact> Contact { get; set; }
-        public virtual DbSet<ImageCategory> ImageCategory { get; set; }
-        public virtual DbSet<Options> Options { get; set; }
-        public virtual DbSet<PcTopla> PcTopla { get; set; }
-        public virtual DbSet<Product> Product { get; set; }
-        public virtual DbSet<ProductImage> ProductImage { get; set; }
-        public virtual DbSet<ProductOptions> ProductOptions { get; set; }
-        public virtual DbSet<Questions> Questions { get; set; }
-        public virtual DbSet<Slide> Slide { get; set; }
-        public virtual DbSet<SubCategory> SubCategory { get; set; }
-        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
-        public virtual DbSet<Users> Users { get; set; }
-        public virtual DbSet<OptionProduct> OptionProduct { get; set; }
+        public virtual DbSet<AboutU> AboutUs { get; set; }
+        public virtual DbSet<Admin> Admins { get; set; }
+        public virtual DbSet<Brend> Brends { get; set; }
+        public virtual DbSet<Category> Categories { get; set; }
+        public virtual DbSet<Contact> Contacts { get; set; }
+        public virtual DbSet<ImageCategory> ImageCategories { get; set; }
+        public virtual DbSet<Option> Options { get; set; }
+        public virtual DbSet<PcTopla> PcToplas { get; set; }
+        public virtual DbSet<Product> Products { get; set; }
+        public virtual DbSet<ProductImage> ProductImages { get; set; }
+        public virtual DbSet<ProductOption> ProductOptions { get; set; }
+        public virtual DbSet<Question> Questions { get; set; }
+        public virtual DbSet<Slide> Slides { get; set; }
+        public virtual DbSet<SubCategory> SubCategories { get; set; }
+        public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<OptionProduct> OptionProducts { get; set; }
     }
 }

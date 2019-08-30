@@ -9,14 +9,14 @@ namespace TexnoGallery.Controllers
 {
     public class ProductController : Controller
     {
-        TexnoGalleryEntities db = new TexnoGalleryEntities();
+        texnoEntities db = new texnoEntities();
         // GET: Product
         public ActionResult Product()
         {
             var defaultModel = new DefaultViewModel
             {
-                CategoryName = db.Category.ToList(),
-                SubCategoryName = db.SubCategory.ToList()
+                CategoryName = db.Categories.ToList(),
+                SubCategoryName = db.SubCategories.ToList()
             };
             return View();
         }
